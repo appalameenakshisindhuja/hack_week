@@ -23,8 +23,5 @@ A simple and interactive **command-line dice rolling simulator** built using Pyt
 ---
 
 ## 📦 Installation
-
-
-
-2.Run the script in vs code :
+1.Run the script in vs code :
 python dice.py
