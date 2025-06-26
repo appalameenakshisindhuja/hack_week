@@ -6,7 +6,6 @@ This Python script uses **Selenium WebDriver** to:
 ✅ Search and follow a target Instagram account  
 ✅ Extract profile information such as:
 - Username
-- Bio
 - Number of Posts
 - Followers
 - Following
