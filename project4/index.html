@@ -1,328 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Pikachu</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 50px;
-            background: linear-gradient(135deg, #87CEEB, #98FB98);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-
-        .pikachu {
-            position: relative;
-            width: 300px;
-            height: 350px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Head */
-        .head {
-            position: absolute;
-            width: 200px;
-            height: 180px;
-            background: #FFD700;
-            border-radius: 50% 50% 45% 45%;
-            top: 50px;
-            left: 50px;
-            border: 3px solid #FFA500;
-        }
-
-        /* Ears */
-        .ear {
-            position: absolute;
-            width: 40px;
-            height: 80px;
-            background: #FFD700;
-            border-radius: 50% 50% 20% 80%;
-            border: 3px solid #FFA500;
-        }
-
-        .ear.left {
-            top: 20px;
-            left: 30px;
-            transform: rotate(-25deg);
-        }
-
-        .ear.right {
-            top: 20px;
-            right: 30px;
-            transform: rotate(25deg);
-        }
-
-        .ear-tip {
-            position: absolute;
-            width: 20px;
-            height: 25px;
-            background: #2C2C2C;
-            border-radius: 50% 50% 20% 80%;
-            top: 5px;
-            left: 10px;
-        }
-
-        /* Eyes */
-        .eye {
-            position: absolute;
-            width: 25px;
-            height: 35px;
-            background: #2C2C2C;
-            border-radius: 50%;
-            top: 100px;
-        }
-
-        .eye.left {
-            left: 95px;
-        }
-
-        .eye.right {
-            right: 95px;
-        }
-
-        .eye-shine {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            top: 8px;
-            left: 5px;
-        }
-
-        /* Nose */
-        .nose {
-            position: absolute;
-            width: 8px;
-            height: 6px;
-            background: #2C2C2C;
-            border-radius: 50%;
-            top: 130px;
-            left: 146px;
-        }
-
-        /* Mouth */
-        .mouth {
-            position: absolute;
-            width: 40px;
-            height: 20px;
-            border: 3px solid #2C2C2C;
-            border-top: none;
-            border-radius: 0 0 40px 40px;
-            top: 140px;
-            left: 130px;
-            background: transparent;
-        }
-
-        /* Cheeks */
-        .cheek {
-            position: absolute;
-            width: 30px;
-            height: 25px;
-            background: #FF6B6B;
-            border-radius: 50%;
-            top: 120px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        .cheek.left {
-            left: 50px;
-        }
-
-        .cheek.right {
-            right: 50px;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 5px #FF6B6B; }
-            to { box-shadow: 0 0 15px #FF6B6B, 0 0 20px #FF6B6B; }
-        }
-
-        /* Body */
-        .body {
-            position: absolute;
-            width: 120px;
-            height: 100px;
-            background: #FFD700;
-            border-radius: 50%;
-            top: 200px;
-            left: 90px;
-            border: 3px solid #FFA500;
-        }
-
-        /* Arms */
-        .arm {
-            position: absolute;
-            width: 35px;
-            height: 70px;
-            background: #FFD700;
-            border-radius: 20px;
-            border: 3px solid #FFA500;
-        }
-
-        .arm.left {
-            top: 210px;
-            left: 45px;
-            transform: rotate(-20deg);
-        }
-
-        .arm.right {
-            top: 210px;
-            right: 45px;
-            transform: rotate(20deg);
-        }
-
-        /* Legs */
-        .leg {
-            position: absolute;
-            width: 30px;
-            height: 40px;
-            background: #FFD700;
-            border-radius: 15px;
-            border: 3px solid #FFA500;
-        }
-
-        .leg.left {
-            top: 280px;
-            left: 100px;
-        }
-
-        .leg.right {
-            top: 280px;
-            right: 100px;
-        }
-
-        /* Tail */
-        .tail {
-            position: absolute;
-            width: 60px;
-            height: 15px;
-            background: #FFD700;
-            border-radius: 20px;
-            top: 220px;
-            right: 20px;
-            transform: rotate(45deg);
-            border: 3px solid #FFA500;
-        }
-
-        .tail::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 12px;
-            background: #FFD700;
-            border-radius: 20px;
-            top: -20px;
-            right: -10px;
-            transform: rotate(-30deg);
-            border: 3px solid #FFA500;
-        }
-
-        .tail::before {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 8px;
-            background: #FFD700;
-            border-radius: 20px;
-            top: -35px;
-            right: -5px;
-            transform: rotate(-60deg);
-            border: 3px solid #FFA500;
-        }
-
-        /* Belly stripes */
-        .stripe {
-            position: absolute;
-            height: 8px;
-            background: #FFA500;
-            border-radius: 4px;
-        }
-
-        .stripe:nth-child(1) {
-            width: 60px;
-            top: 240px;
-            left: 120px;
-        }
-
-        .stripe:nth-child(2) {
-            width: 80px;
-            top: 255px;
-            left: 110px;
-        }
-
-        /* Title */
-        .title {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            font-weight: bold;
-            color: #2C2C2C;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <title>title</title>
 </head>
 <body>
     <div class="pikachu">
-        <!-- Ears -->
-        <div class="ear left">
-            <div class="ear-tip"></div>
+    <div class="ear-left"></div>
+    <div class="ear-right"></div>
+    <!-- //Ear -->
+
+    <div class="pik-body">
+        <div class="head">
+            <div class="eye-left"></div>
+            <div class="eye-right"></div>
+            <div class="nose"></div>
+            <div class="mouth"></div>
+            <div class="cheek-left">
+
+                <div class="hold-thunder hold-thunder-1">
+                    <div class="thunder thunder-1"></div>
+                    <div class="thunder thunder-2"></div>
+                    <div class="thunder thunder-3"></div>
+                </div>
+                <!-- //Thunder 1 -->
+
+                <div class="hold-thunder hold-thunder-2">
+                    <div class="thunder thunder-1"></div>
+                    <div class="thunder thunder-2"></div>
+                    <div class="thunder thunder-3"></div>
+                </div>
+                <!-- //Thunder 2 -->
+
+                <div class="hold-thunder hold-thunder-3">
+                    <div class="thunder thunder-1"></div>
+                    <div class="thunder thunder-2"></div>
+                    <div class="thunder thunder-3"></div>
+                </div>
+                <!-- //Thunder 3 -->
+
+                <div class="light"></div>
+                <!-- Light -->
+            </div>
+            <div class="cheek-right">
+
+                <div class="hold-thunder hold-thunder-1">
+                    <div class="thunder thunder-1"></div>
+                    <div class="thunder thunder-2"></div>
+                    <div class="thunder thunder-3"></div>
+                </div>
+                <!-- //Thunder 1 -->
+
+                <div class="hold-thunder hold-thunder-2">
+                    <div class="thunder thunder-1"></div>
+                    <div class="thunder thunder-2"></div>
+                    <div class="thunder thunder-3"></div>
+                </div>
+                <!-- //Thunder 2 -->
+
+                <div class="hold-thunder hold-thunder-3">
+                    <div class="thunder thunder-1"></div>
+                    <div class="thunder thunder-2"></div>
+                    <div class="thunder thunder-3"></div>
+                </div>
+                <!-- //Thunder 3 -->
+
+                <div class="light"></div>
+                <!-- Light -->
+            </div>
         </div>
-        <div class="ear right">
-            <div class="ear-tip"></div>
+        <!-- //head -->
+
+        <div class="mid">
+            <div class="hand-left"></div>
+            <div class="hand-right"></div>
+            <div class="mark-1"></div>
+            <div class="mark-2"></div>
         </div>
-        
-        <!-- Head -->
-        <div class="head"></div>
-        
-        <!-- Eyes -->
-        <div class="eye left">
-            <div class="eye-shine"></div>
-        </div>
-        <div class="eye right">
-            <div class="eye-shine"></div>
-        </div>
-        
-        <!-- Nose -->
-        <div class="nose"></div>
-        
-        <!-- Mouth -->
-        <div class="mouth"></div>
-        
-        <!-- Cheeks -->
-        <div class="cheek left"></div>
-        <div class="cheek right"></div>
-        
-        <!-- Body -->
-        <div class="body">
-            <div class="stripe"></div>
-            <div class="stripe"></div>
-        </div>
-        
-        <!-- Arms -->
-        <div class="arm left"></div>
-        <div class="arm right"></div>
-        
-        <!-- Legs -->
-        <div class="leg left"></div>
-        <div class="leg right"></div>
-        
-        <!-- Tail -->
-        <div class="tail"></div>
-        
-        <div class="title">Pikachu!</div>
+        <!-- //Mid -->
+
+        <div class="foot-left"></div>
+        <div class="foot-right"></div>
+        <!-- //Foot -->
     </div>
+    <!-- //Body -->
+
+    <div class="pik-tail">
+        <div class="tail tail-1"></div>
+        <div class="tail tail-2"></div>
+        <div class="tail tail-3"></div>
+        <div class="tail tail-4"></div>
+        <div class="tail tail-5"></div>
+    </div>
+    <!-- //Tail -->
+</div>
+
+    <style>
+        @import url('./style.css');
+    </style>
 </body>
 </html>
