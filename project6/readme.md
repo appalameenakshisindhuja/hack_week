@@ -45,7 +45,8 @@ Click "Save Entry & Analyze"
 View the mood, summary, and insights on the timeline
 
 ## screenshot of execution
-!(image.png)
+![Alt text](image.png)
+
 
 
 🙌 Acknowledgements
