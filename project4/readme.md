@@ -12,8 +12,9 @@ This project showcases a famous character  Pikachu designed using **only HTML an
 - Fully responsive on modern browsers
 
 ## 📁 Project Structure
-📁mascot/
+📁project/
 ┣ 📄 index.html
+┣ 📄 style.css
 
 ## 🛠️ How It Works
 
