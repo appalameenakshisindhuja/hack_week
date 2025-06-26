@@ -44,6 +44,9 @@ Click "Save Entry & Analyze"
 
 View the mood, summary, and insights on the timeline
 
+## screenshot of execution
+!(image.png)
+
 
 🙌 Acknowledgements
 Google Gemini API
