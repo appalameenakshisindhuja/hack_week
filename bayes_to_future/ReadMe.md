@@ -54,16 +54,6 @@ When prompted, enter raw values like:
 age=58, fbs=130
 The script will normalize these values automatically and perform inference to predict other probabilities such as target, chol, and thalach.
 
-📊 Output
-The model outputs conditional probabilities like:
 
-
-P(target | age=0.6, fbs=0.3):
-+-----------+--------------+
-| target    |   phi(target)|
-+===========+==============+
-| 0         |       0.42   |
-| 1         |       0.58   |
-+-----------+--------------+
 📈 Visualizations
 The Bayesian Network structure is also displayed graphically using networkx and matplotlib.
