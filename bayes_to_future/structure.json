@@ -1,0 +1,18 @@
+[
+    [
+        "age",
+        "fbs"
+    ],
+    [
+        "fbs",
+        "target"
+    ],
+    [
+        "target",
+        "chol"
+    ],
+    [
+        "target",
+        "thalach"
+    ]
+]
