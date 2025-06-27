@@ -62,7 +62,7 @@ The Bayesian Network structure is also displayed graphically using networkx and 
 
 ##output Dataset  Screenshot
 
-![App Screenshot](image copy.png)
+![App Screenshot](imagecopy.png)
 
 
 
