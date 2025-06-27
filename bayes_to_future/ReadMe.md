@@ -59,5 +59,8 @@ The script will normalize these values automatically and perform inference to pr
 The Bayesian Network structure is also displayed graphically using networkx and matplotlib.
 ## Screenshot
 
+## Screenshot
+
 ![App Screenshot](image copy.png)
+
 
