@@ -39,19 +39,20 @@ Make sure you have Python installed (Python 3.6+ recommended).
 
 
 ## 💻 Usage
-## 🔁 Basic Conversion
+
+# 🔁 for  Basic Conversion
 python markdown.py mark.md
 
-## 📤 Specify Output File
+# 📤 To  Specify Output File
 python markdown.py mark.md -o output.html
 
-🏷️ Set Custom Title
+# 🏷️ Set Custom Title
 python markdown.py mark.md --title "My Document"
 
-🧼 Generate HTML Without Embedded CSS
+# 🧼 Generate HTML Without Embedded CSS
 python markdown.py mark.md --no-css
 
-📁 Example
+# 📁 Example
 python md_to_html.py sample.md -o sample.html --title "Sample Page"
 
 This command will:
