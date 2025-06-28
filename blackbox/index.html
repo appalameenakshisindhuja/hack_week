@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery API Explorer</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Fira Code', monospace;
+        background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+        color: #00ffcc;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        
+        background: linear-gradient(45deg, #00ffcc, #33ff00);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .endpoint-card {
+        background: rgba(0, 255, 204, 0.08);
+        border: 1px solid #00ffcc66;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px #00ffcc22;
+        transition: all 0.3s ease;
+    }
+
+    .endpoint-card:hover {
+        box-shadow: 0 0 20px #00ffcc66;
+        transform: translateY(-4px);
+    }
+
+    .endpoint-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #ff00ff;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #ffffff;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        background: #1f1f1f;
+        border: 1px solid #00ffcc88;
+        border-radius: 8px;
+        padding: 10px;
+        color: #00ffcc;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .test-button {
+        width: 100%;
+        background: linear-gradient(45deg, #ff00ff, #00ffff);
+        border: none;
+        padding: 12px;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 0 10px #ff00ff55;
+        transition: all 0.3s ease;
+    }
+
+    .test-button:hover {
+        box-shadow: 0 0 20px #ff00ff99;
+        transform: scale(1.02);
+    }
+
+    .response-area {
+        background: #0f0f0f;
+        border: 1px solid #444;
+        border-radius: 8px;
+        padding: 10px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9rem;
+        color: #00ffcc;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        min-height: 80px;
+    }
+
+    .status-indicator {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        padding: 10px 15px;
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #00ffcc;
+        font-family: monospace;
+        font-size: 12px;
+        z-index: 999;
+    }
+
+    .loading {
+        opacity: 0.6;
+    }
+
+    .success {
+        color: #00ffcc;
+    }
+
+    .error {
+        color: #ff4d4d;
+    }
+</style>
+
+</head>
+<body>
+    <div class="status-indicator" id="status">🔗 Ready to Explore</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🕵️ Mystery API Explorer</h1>
+            <p>Reverse engineer the hidden behaviors of these mysterious endpoints</p>
+            <p><strong>Base URL:</strong> <span id="baseUrl">http://localhost:5000</span></p>
+        </div>
+
+        <div class="endpoints-grid">
+            <!-- Echo Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Echo Endpoint</div>
+                <div class="input-group">
+                    <label>Message:</label>
+                    <input type="text" id="echo-message" placeholder="Enter a message to echo">
+                </div>
+                <button class="test-button" onclick="testEcho()">Test Echo</button>
+                <div class="response-area" id="echo-response">Click "Test Echo" to see the response...</div>
+            </div>
+
+            <!-- Transform Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Transform Endpoint</div>
+                <div class="input-group">
+                    <label>Input Text:</label>
+                    <textarea id="transform-input" placeholder="Enter text to transform"></textarea>
+                </div>
+                <button class="test-button" onclick="testTransform()">Test Transform</button>
+                <div class="response-area" id="transform-response">Click "Test Transform" to see the response...</div>
+            </div>
+
+            <!-- Filter Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Filter Endpoint</div>
+                <div class="input-group">
+                    <label>Content:</label>
+                    <textarea id="filter-content" placeholder="Enter content to filter"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Filter Type:</label>
+                    <select id="filter-type">
+                        <option value="default">Default</option>
+                        <option value="numbers">Numbers</option>
+                        <option value="vowels">Vowels</option>
+                        <option value="reverse">Reverse</option>
+                    </select>
+                </div>
+                <button class="test-button" onclick="testFilter()">Test Filter</button>
+                <div class="response-area" id="filter-response">Click "Test Filter" to see the response...</div>
+            </div>
+
+            <!-- Sequence Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Sequence Endpoint</div>
+                <div class="input-group">
+                    <label>Seed:</label>
+                    <input type="number" id="sequence-seed" value="1" placeholder="Enter seed number">
+                </div>
+                <div class="input-group">
+                    <label>Count:</label>
+                    <input type="number" id="sequence-count" value="5" placeholder="Number of items">
+                </div>
+                <button class="test-button" onclick="testSequence()">Test Sequence</button>
+                <div class="response-area" id="sequence-response">Click "Test Sequence" to see the response...</div>
+            </div>
+
+            <!-- Memory Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Memory Endpoint</div>
+                <div class="input-group">
+                    <label>Session ID:</label>
+                    <input type="text" id="memory-session" value="test-session" placeholder="Session identifier">
+                </div>
+                <div class="input-group">
+                    <label>Action:</label>
+                    <select id="memory-action">
+                        <option value="store">Store</option>
+                        <option value="retrieve">Retrieve</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Value (for store):</label>
+                    <input type="text" id="memory-value" placeholder="Data to store">
+                </div>
+                <button class="test-button" onclick="testMemory()">Test Memory</button>
+                <div class="response-area" id="memory-response">Click "Test Memory" to see the response...</div>
+            </div>
+
+            <!-- Validator Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Validator Endpoint</div>
+                <div class="input-group">
+                    <label>Value to Validate:</label>
+                    <input type="text" id="validator-value" placeholder="Enter value to validate">
+                </div>
+                <div class="input-group">
+                    <label>Validation Type:</label>
+                    <select id="validator-type">
+                        <option value="mystery">Mystery</option>
+                        <option value="pattern">Pattern</option>
+                    </select>
+                </div>
+                <button class="test-button" onclick="testValidator()">Test Validator</button>
+                <div class="response-area" id="validator-response">Click "Test Validator" to see the response...</div>
+            </div>
+
+            <!-- Cipher Endpoint -->
+            <div class="endpoint-card">
+                <div class="endpoint-title">Cipher Endpoint</div>
+                <div class="input-group">
+                    <label>Text:</label>
+                    <input type="text" id="cipher-text" placeholder="Text to encode/decode">
+                </div>
+                <div class="input-group">
+                    <label>Operation:</label>
+                    <select id="cipher-operation">
+                        <option value="encode">Encode</option>
+                        <option value="decode">Decode</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Key:</label>
+                    <input type="number" id="cipher-key" value="0" placeholder="Cipher key">
+                </div>
+                <button class="test-button" onclick="testCipher()">Test Cipher</button>
+                <div class="response-area" id="cipher-response">Click "Test Cipher" to see the response...</div>
+            </div>
+        </div>
+
+        <div class="discoveries">
+            <h2>🔬 Your Discoveries</h2>
+            <p>Document your findings as you reverse engineer each endpoint:</p>
+            <div id="discoveries-list">
+                <div class="discovery-item">
+                    <strong>Getting Started:</strong> Try the same input multiple times on different endpoints to spot patterns!
+                </div>
+            </div>
+            <button class="test-button" onclick="addDiscovery()" style="margin-top: 15px;">+ Add Discovery</button>
+        </div>
+    </div>
+
+    <script>
+        const baseUrl = 'http://localhost:5000';
+        let requestCount = 0;
+
+        function updateStatus(message, type = '') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status-indicator ' + type;
+        }
+
+        async function makeRequest(endpoint, data) {
+            requestCount++;
+            updateStatus(`🔄 Request #${requestCount}`, 'loading');
+            
+            try {
+                const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                updateStatus(`✅ Request #${requestCount} completed`, 'success');
+                return { success: true, data: result, status: response.status };
+            } catch (error) {
+                updateStatus(`❌ Request #${requestCount} failed`, 'error');
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function testEcho() {
+            const message = document.getElementById('echo-message').value;
+            const result = await makeRequest('echo', { message });
+            document.getElementById('echo-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function testTransform() {
+            const input = document.getElementById('transform-input').value;
+            const result = await makeRequest('transform', { input });
+            document.getElementById('transform-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function testFilter() {
+            const content = document.getElementById('filter-content').value;
+            const type = document.getElementById('filter-type').value;
+            const result = await makeRequest('filter', { content, type });
+            document.getElementById('filter-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function testSequence() {
+            const seed = parseInt(document.getElementById('sequence-seed').value);
+            const count = parseInt(document.getElementById('sequence-count').value);
+            const result = await makeRequest('sequence', { seed, count });
+            document.getElementById('sequence-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function testMemory() {
+            const session = document.getElementById('memory-session').value;
+            const action = document.getElementById('memory-action').value;
+            const value = document.getElementById('memory-value').value;
+            
+            const data = { session, action };
+            if (action === 'store') {
+                data.value = value;
+            }
+            
+            const result = await makeRequest('memory', data);
+            document.getElementById('memory-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function testValidator() {
+            const value = document.getElementById('validator-value').value;
+            const type = document.getElementById('validator-type').value;
+            const result = await makeRequest('validator', { value, type });
+            document.getElementById('validator-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function testCipher() {
+            const text = document.getElementById('cipher-text').value;
+            const operation = document.getElementById('cipher-operation').value;
+            const key = parseInt(document.getElementById('cipher-key').value);
+            const result = await makeRequest('cipher', { text, operation, key });
+            document.getElementById('cipher-response').textContent = JSON.stringify(result, null, 2);
+        }
+
+        function addDiscovery() {
+            const discovery = prompt("What did you discover?");
+            if (discovery) {
+                const discoveriesList = document.getElementById('discoveries-list');
+                const discoveryItem = document.createElement('div');
+                discoveryItem.className = 'discovery-item';
+                discoveryItem.innerHTML = `<strong>Discovery:</strong> ${discovery}`;
+                discoveriesList.appendChild(discoveryItem);
+            }
+        }
+
+        // Auto-populate some example data
+        document.getElementById('echo-message').value = "Hello World";
+        document.getElementById('transform-input').value = "test";
+        document.getElementById('filter-content').value = "Hello world this is a test message";
+        document.getElementById('validator-value').value = "abc123";
+        document.getElementById('cipher-text').value = "secret message";
+    </script>
+</body>
+</html>
