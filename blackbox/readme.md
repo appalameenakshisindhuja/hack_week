@@ -39,7 +39,7 @@ Welcome to the **Mystery API Explorer** — a full-stack project to interactivel
 
 # Clone the repo
 git clone https://github.com/your-username/blackbox.git
-cd mystery-api-explorer
+cd blackbox
 
 # Install dependencies
 pip install flask flask-cors
