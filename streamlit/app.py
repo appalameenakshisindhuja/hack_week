@@ -3,6 +3,7 @@ import os
 from lyrics_fetcher import LyricsFetcher
 from wordcloud_generator import WordCloudGenerator
 import time
+from dotenv import load_dotenv
 
 # Configure page
 st.set_page_config(
@@ -33,11 +34,18 @@ def main():
         st.session_state.last_searched = ""
     
     # Get API key status
-    api_key = os.getenv("GENIUS_API_KEY", "")
-    if not api_key:
-        st.error("⚠️ Genius API key not found. Please set the GENIUS_API_KEY environment variable.")
-        st.info("To get a Genius API key, visit: https://genius.com/api-clients")
-        return
+    from dotenv import load_dotenv
+import os
+import streamlit as st
+
+load_dotenv()  # loads variables from .env
+
+api_key = os.getenv("GENIUS_API_KEY", "")
+if not api_key:
+    st.error("⚠️ Genius API key not found. Please set the GENIUS_API_KEY environment variable.")
+    st.info("To get a Genius API key, visit: https://genius.com/api-clients")
+    st.stop()  # use st.stop() instead of return in Streamlit
+
     
     # Initialize fetcher and generator
     lyrics_fetcher = get_lyrics_fetcher()
